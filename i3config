@@ -18,14 +18,13 @@
 #set the modivier
 set $mod Mod4
 
-#Make editing easier:
-
-# set "workspace" substitution:
+# set "workspace" substitution
 set $ws workspace
-# mct stands vor "MoveConTainer":
+
+# mct stands vor "MoveConTainer"
 set $mct move container to workspace
 
-# Set marks:
+# Set marks
 set $mark1 za
 set $mark2 zs
 set $mark3 zd
@@ -36,14 +35,17 @@ set $mark7 zj
 set $mark8 zk
 set $mark9 zl
 
-
-# Screens:
+# Screens
 set $screen1 HDMI-0
 set $screen2 DVI-1
 set $screen3
 
+# Set the screensavers
+set $pathtoscreensaver /home/gerrit/e-t-black-background.png
+
 
 ##### workspace substitutions #####
+
 #Set the workspaces:
 set $ws1 1 : H1M
 set $ws2 2 : H2M
@@ -54,6 +56,7 @@ set $ws6 6 : V1M
 set $ws7 7 : N1M
 set $ws8 8 : N1M
 set $ws9 9 : P1m
+
 set $ws10 10 : AUDIO
 set $ws11 11 : H1L
 set $ws12 12 : H2L
@@ -64,6 +67,7 @@ set $ws16 16 : N2L
 set $ws17 17 : Z1L
 set $ws18 18 : Z2L
 set $ws19 19 : Z3L
+
 set $ws21 21 : H1R
 set $ws22 22 : H2R
 set $ws23 23 : A1R
@@ -95,10 +99,11 @@ set $zrd     #e89393
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
- Font for window titles.
+# Font for window titles.
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# Explanation
 # Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -118,7 +123,7 @@ bindsym $mod+Shift+q kill
 # installed.
 bindsym $mod+colon exec --no-startup-id i3-dmenu-desktop
 
-#All 3 Dropped in favor of power system mode:#
+# These were dropped in favor of the System Power mode:
 # reload the configuration file
 #bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -134,6 +139,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -142,19 +148,22 @@ bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+b split h
+
 # split in vertical orientation
 bindsym $mod+v split v
 
 # focus the parent container
 bindsym $mod+a focus parent
+
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+shift+a focus child
 
 #move windows on left/right screen
 bindsym $mod+Shift+Left move container to output left
 bindsym $mod+Shift+Down move container to workspace prev
 bindsym $mod+Shift+Up move container to workspace next
 bindsym $mod+Shift+Right move container to output right
+
 #focus on left/right screen
 bindsym $mod+Left focus output left
 bindsym $mod+Down workspace prev_on_output 
@@ -166,17 +175,19 @@ bindsym $mod+Right focus output right
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 
 
 ##### Screen Layout #####
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -208,15 +219,20 @@ for_window [class="Xfce4-notifyd"] floating enable
 for_window [class="Xfce4-notifyd"] move absolute position 50 50
 for_window [class="calculator"] floating enable
 for_window [class="Steam" title=".* Kategorien .*"] floating enable
+
+
 ##### Scratchpad
+
 #move that window to scratchpad *edited
 bindsym $mod+n move scratchpad 
+
 #show from scratchpad *edited
 bindsym $mod+m scratchpad show
 
 
-##### w# switch to workspaces:
-# H: Haupt, A: Arbeit, C: Kontrolle, V: Virualisierung, N:Neben; M:Mitte, L:Links,R:Rechts.
+##### workspaces #####
+
+#switch to workspaces via 0-9 
 bindsym $mod+1 $ws $ws1
 bindsym $mod+2 $ws $ws2
 bindsym $mod+3 $ws $ws3
@@ -235,6 +251,7 @@ bindsym $mod+Control+6 $ws $ws21
 bindsym $mod+Control+7 $ws $ws22
 bindsym $mod+Control+8 $ws $ws23
 bindsym $mod+Control+9 $ws $ws24
+
 # move focused container to workspace
 bindsym $mod+Shift+1 $mct $ws1
 bindsym $mod+Shift+2 $mct $ws2
@@ -255,8 +272,7 @@ bindsym $mod+Shift+Control+8 $ws $ws23
 bindsym $mod+Shift+Control+9 $ws $ws24
 
 
-
-##### Workspaces always on specific screens:
+##### Workspaces always on specific screens
 
 #Everything that's on Screen 1:
 workspace "$ws1" output $screen1
@@ -288,9 +304,7 @@ workspace "$ws19" output $screen2
 
 #Lock screen via locker (not active due to "power mode"
 #bindsym Pause exec --no-startup-id i3lock -t -i /home/gerrit/e-t-black-background.png
-# Pulse Audio controls
-bindsym $mod+y exec amixer -q set Front 1dB+ unmute
-bindsym $mod+Control+y exec amixer -q set Front 1dB- unmute
+
 # Audio/Mutltimedia controls:
 
 # Tip from: https://faq.i3wm.org/question/3747/enabling-multimedia-keys/
@@ -310,16 +324,19 @@ bindsym XF86AudioPrev exec playerctl previous
 ##### Autostart #####
 
 #set the right screen resolution and wallpaper:
-exec --no-startup-id /home/gerrit/.screenlayout/2Mon.sh
-exec --no-startup-id feh --bg-scale ~/wallpaper2.jpg
+exec --no-startup-id  /home/gerrit/.screenlayout/2Mon.sh && feh --bg-scale ~/wallpaper2.jpg
+
 #start synergy:
 exec --no-startup-id synergy
 
 
 ##### Resize mode #####
+
 # resize window (you can also use the mouse for that)
 mode "R" {
 #mode "resize" {
+
+ 	# old hotkeys:
         # These bindings trigger as soon as you enter the resize mode
 	
         # Pressing left will shrink the window’s width.
@@ -327,7 +344,6 @@ mode "R" {
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
 
- 	# old hotkeys:
         #bindsym j resize shrink width 10 px or 10 ppt
         #bindsym k resize grow height 10 px or 10 ppt
         #bindsym l resize shrink height 10 px or 10 ppt
@@ -338,29 +354,26 @@ mode "R" {
         #bindsym Up resize shrink height 10 px or 10 ppt
         #bindsym Right resize grow width 10 px or 10 ppt
 
-
 	# New hotkeys, vim-style:
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
+
 	 # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 	bindsym odiaeresis mode "default"
 }
-
 #keystroke for the resize mode:
 #bindsym $mod+r mode "resize"
 bindsym $mod+r mode "R" 
-
 
 
 ##### System mode #####
@@ -370,22 +383,30 @@ bindsym $mod+r mode "R"
 
 # set $Locker i3lock && sleep 1
 
-set $mode_system P
 #old hotkeys: (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock -t -i /home/gerrit/e-t-black-background.png , mode "default"
-   # bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    #bindsym s exec --no-startup-id "sh -c i3lock && sleep 0.5 && sudo /usr/sbin/pm-suspend", mode "default"
-   #bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-   #bindsym r exec --no-startup-id systemctl reboot, mode "default"
-   #restart i3 inplace:
-    bindsym r restart
-   #reload the config file:
-    bindsym c reload
-    #bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
-    # More secure, with prompt to shutdown:
-    bindsym Shift+s exec "i3-nagbar -t warning -m 'Wirklich herunterfahren? Änderungen bitte speichern!' -b 'Herunterfahren' 'systemctl poweroff -i"
-    bindsym e exec "i3-nagbar -t warning -m 'Wirklich ausloggen? Änderungen werden nicht gespeichert!' -b 'Ausloggen' 'i3-msg exit'"
+mode "P" {
+	
+	# Lock to screensaver:
+	bindsym l exec --no-startup-id i3lock -t -i $Pathtoscreensaver , mode "default"
+
+	# Momentarily deactivated, because these aren't working properly on my machine:
+	# bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	#bindsym s exec --no-startup-id "sh -c i3lock && sleep 0.5 && sudo /usr/sbin/pm-suspend", mode "default"
+	#bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+	#bindsym r exec --no-startup-id systemctl reboot, mode "default"
+
+	#restart i3 inplace:
+	bindsym r restart
+
+	#reload the config file:
+	bindsym c reload
+
+	# Shutdown; deactivated
+	#bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+	# More secure shutdown, with prompt to shutdown
+	bindsym Shift+s exec "i3-nagbar -t warning -m 'Wirklich herunterfahren? Änderungen bitte speichern!' -b 'Herunterfahren' 'systemctl poweroff -i"
+	bindsym e exec "i3-nagbar -t warning -m 'Wirklich ausloggen? Änderungen werden nicht gespeichert!' -b 'Ausloggen' 'i3-msg exit'"
 
 
    #  back to normal: Enter or Escape
@@ -394,7 +415,6 @@ mode "$mode_system" {
 }
   
       bindsym $mod+p mode "$mode_system"
-
 
 
 ##### Focus mode #####
@@ -458,6 +478,7 @@ bindsym $mod+c mode "F"
 
 #See: Focus mode. 
 # keybindings for marking and jumping to clients
+
 	bindsym $mod+Shift+d  exec i3-input -F 'mark %s' -P 'Mark name: ', mode "default"
         bindsym $mod+d  exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: ', mode "default"
 
@@ -538,13 +559,14 @@ mode "W"
 bindsym $mod+0 mode "W"
 bindsym $mod+odiaeresis mode "W"
 
+
 ##### Configure i3bar #####
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # see i3bar's config for changes
 bar {
       #  status_command i3status 
-      #	 output HDMI-0          
+      	#  output $screen1          
 	# new status command, displays currently played song (cmus):
       	status_command ~/.mystatus.sh 
 	#hides i3bar  automatically, unhides with §mod
